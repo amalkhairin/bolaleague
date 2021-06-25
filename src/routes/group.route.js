@@ -226,6 +226,318 @@ const knex = require('../config/db');
     }
 })
 
+router.get('/qualified', (req, res) => {
+    let group_winner = []
+    let group_runner_up = []
+    knex.select().table('GroupA').orderBy('poin', 'desc').orderBy('jumlah', 'desc').limit(2)
+        .then(dataA => {
+            group_winner.push(dataA[0])
+            group_runner_up.push(dataA[1])
+            knex.select().table('GroupB').orderBy('poin', 'desc').orderBy('jumlah', 'desc').limit(2)
+                .then(dataB => {
+                    group_winner.push(dataB[0])
+                    group_runner_up.push(dataB[1])
+                    knex.select().table('GroupC').orderBy('poin', 'desc').orderBy('jumlah', 'desc').limit(2)
+                        .then(dataC => {
+                            group_winner.push(dataC[0])
+                            group_runner_up.push(dataC[1])
+                            knex.select().table('GroupD').orderBy('poin', 'desc').orderBy('jumlah', 'desc').limit(2)
+                                .then(dataD => {
+                                    group_winner.push(dataD[0])
+                                    group_runner_up.push(dataD[1])
+                                    knex.select().table('GroupE').orderBy('poin', 'desc').orderBy('jumlah', 'desc').limit(2)
+                                        .then(dataE => {
+                                            group_winner.push(dataE[0])
+                                            group_runner_up.push(dataE[1])
+                                            knex.select().table('GroupF').orderBy('poin', 'desc').orderBy('jumlah', 'desc').limit(2)
+                                                .then(dataF => {
+                                                    group_winner.push(dataF[0])
+                                                    group_runner_up.push(dataF[1])
+                                                    knex.select().table('GroupG').orderBy('poin', 'desc').orderBy('jumlah', 'desc').limit(2)
+                                                        .then(dataG => {
+                                                            group_winner.push(dataG[0])
+                                                            group_runner_up.push(dataG[1])
+                                                            knex.select().table('GroupH').orderBy('poin', 'desc').orderBy('jumlah', 'desc').limit(2)
+                                                                .then(dataH => {
+                                                                    group_winner.push(dataH[0])
+                                                                    group_runner_up.push(dataH[1])
+                                                                    const matches = [
+                                                                        {
+                                                                            leg: 1,
+                                                                            home_team_id: group_winner[0].owner_id,
+                                                                            home_team_name: group_winner[0].team_name,
+                                                                            away_team_id: group_runner_up[2].owner_id,
+                                                                            away_team_name: group_runner_up[2].team_name,
+                                                                            home_score: "-",
+                                                                            away_score: "-",
+                                                                            is_finished: 0
+                                                                        },
+                                                                        {
+                                                                            leg: 1,
+                                                                            home_team_id: group_winner[1].owner_id,
+                                                                            home_team_name: group_winner[1].team_name,
+                                                                            away_team_id: group_runner_up[3].owner_id,
+                                                                            away_team_name: group_runner_up[3].team_name,
+                                                                            home_score: "-",
+                                                                            away_score: "-",
+                                                                            is_finished: 0
+                                                                        },
+                                                                        {
+                                                                            leg: 1,
+                                                                            home_team_id: group_winner[4].owner_id,
+                                                                            home_team_name: group_winner[4].team_name,
+                                                                            away_team_id: group_runner_up[6].owner_id,
+                                                                            away_team_name: group_runner_up[6].team_name,
+                                                                            home_score: "-",
+                                                                            away_score: "-",
+                                                                            is_finished: 0
+                                                                        },
+                                                                        {
+                                                                            leg: 1,
+                                                                            home_team_id: group_winner[5].owner_id,
+                                                                            home_team_name: group_winner[5].team_name,
+                                                                            away_team_id: group_runner_up[7].owner_id,
+                                                                            away_team_name: group_runner_up[7].team_name,
+                                                                            home_score: "-",
+                                                                            away_score: "-",
+                                                                            is_finished: 0
+                                                                        },
+                                                                        {
+                                                                            leg: 1,
+                                                                            home_team_id: group_winner[2].owner_id,
+                                                                            home_team_name: group_winner[2].team_name,
+                                                                            away_team_id: group_runner_up[0].owner_id,
+                                                                            away_team_name: group_runner_up[0].team_name,
+                                                                            home_score: "-",
+                                                                            away_score: "-",
+                                                                            is_finished: 0
+                                                                        },
+                                                                        {
+                                                                            leg: 1,
+                                                                            home_team_id: group_winner[3].owner_id,
+                                                                            home_team_name: group_winner[3].team_name,
+                                                                            away_team_id: group_runner_up[1].owner_id,
+                                                                            away_team_name: group_runner_up[1].team_name,
+                                                                            home_score: "-",
+                                                                            away_score: "-",
+                                                                            is_finished: 0
+                                                                        },
+                                                                        {
+                                                                            leg: 1,
+                                                                            home_team_id: group_winner[6].owner_id,
+                                                                            home_team_name: group_winner[6].team_name,
+                                                                            away_team_id: group_runner_up[4].owner_id,
+                                                                            away_team_name: group_runner_up[4].team_name,
+                                                                            home_score: "-",
+                                                                            away_score: "-",
+                                                                            is_finished: 0
+                                                                        },
+                                                                        {
+                                                                            leg: 1,
+                                                                            home_team_id: group_winner[7].owner_id,
+                                                                            home_team_name: group_winner[7].team_name,
+                                                                            away_team_id: group_runner_up[5].owner_id,
+                                                                            away_team_name: group_runner_up[5].team_name,
+                                                                            home_score: "-",
+                                                                            away_score: "-",
+                                                                            is_finished: 0
+                                                                        },
+                                                                        {
+                                                                            leg: 2,
+                                                                            home_team_id: group_runner_up[2].owner_id,
+                                                                            home_team_name: group_runner_up[2].team_name,
+                                                                            away_team_id: group_winner[0].owner_id,
+                                                                            away_team_name: group_winner[0].team_name,
+                                                                            home_score: "-",
+                                                                            away_score: "-",
+                                                                            is_finished: 0
+                                                                        },
+                                                                        {
+                                                                            leg: 2,
+                                                                            home_team_id: group_runner_up[3].owner_id,
+                                                                            home_team_name: group_runner_up[3].team_name,
+                                                                            away_team_id: group_winner[1].owner_id,
+                                                                            away_team_name: group_winner[1].team_name,
+                                                                            home_score: "-",
+                                                                            away_score: "-",
+                                                                            is_finished: 0
+                                                                        },
+                                                                        {
+                                                                            leg: 2,
+                                                                            home_team_id: group_runner_up[6].owner_id,
+                                                                            home_team_name: group_runner_up[6].team_name,
+                                                                            away_team_id: group_winner[4].owner_id,
+                                                                            away_team_name: group_winner[4].team_name,
+                                                                            home_score: "-",
+                                                                            away_score: "-",
+                                                                            is_finished: 0
+                                                                        },
+                                                                        {
+                                                                            leg: 2,
+                                                                            home_team_id: group_runner_up[7].owner_id,
+                                                                            home_team_name: group_runner_up[7].team_name,
+                                                                            away_team_id: group_winner[5].owner_id,
+                                                                            away_team_name: group_winner[5].team_name,
+                                                                            home_score: "-",
+                                                                            away_score: "-",
+                                                                            is_finished: 0
+                                                                        },
+                                                                        {
+                                                                            leg: 2,
+                                                                            home_team_id: group_runner_up[0].owner_id,
+                                                                            home_team_name: group_runner_up[0].team_name,
+                                                                            away_team_id: group_winner[2].owner_id,
+                                                                            away_team_name: group_winner[2].team_name,
+                                                                            home_score: "-",
+                                                                            away_score: "-",
+                                                                            is_finished: 0
+                                                                        },
+                                                                        {
+                                                                            leg: 2,
+                                                                            home_team_id: group_runner_up[1].owner_id,
+                                                                            home_team_name: group_runner_up[1].team_name,
+                                                                            away_team_id: group_winner[3].owner_id,
+                                                                            away_team_name: group_winner[3].team_name,
+                                                                            home_score: "-",
+                                                                            away_score: "-",
+                                                                            is_finished: 0
+                                                                        },
+                                                                        {
+                                                                            leg: 2,
+                                                                            home_team_id: group_runner_up[4].owner_id,
+                                                                            home_team_name: group_runner_up[4].team_name,
+                                                                            away_team_id: group_winner[6].owner_id,
+                                                                            away_team_name: group_winner[6].team_name,
+                                                                            home_score: "-",
+                                                                            away_score: "-",
+                                                                            is_finished: 0
+                                                                        },
+                                                                        {
+                                                                            leg: 2,
+                                                                            home_team_id: group_runner_up[5].owner_id,
+                                                                            home_team_name: group_runner_up[5].team_name,
+                                                                            away_team_id: group_winner[7].owner_id,
+                                                                            away_team_name: group_winner[7].team_name,
+                                                                            home_score: "-",
+                                                                            away_score: "-",
+                                                                            is_finished: 0
+                                                                        },
+                                                                    ]
 
+                                                                    const rows = matches.map(function(m){
+                                                                        return {
+                                                                            leg: m.leg,
+                                                                            home_team_id: m.home_team_id,
+                                                                            home_team_name: m.home_team_name,
+                                                                            away_team_id: m.away_team_id,
+                                                                            away_team_name: m.away_team_name,
+                                                                            home_score: m.home_score,
+                                                                            away_score: m.away_score,
+                                                                            is_finished: m.is_finished
+                                                                        }
+                                                                    })
+                                                                    knex.insert(rows).into('Round16')
+                                                                        .then(_ => {
+                                                                            res.status(201).send({
+                                                                                success: true,
+                                                                                message: "All qualified teams inserted",
+                                                                            })
+                                                                        })
+                                                                        .catch(function(error){
+                                                                            console.log(error)
+                                                                            res.send({
+                                                                                success: false,
+                                                                                message: "Internal server error!"
+                                                                            })
+                                                                        })
+                                                                })
+                                                                .catch(function(error){
+                                                                    console.log(error)
+                                                                    res.send({
+                                                                        success: false,
+                                                                        message: "Internal server error!"
+                                                                    })
+                                                                })
+                                                        })
+                                                        .catch(function(error){
+                                                            console.log(error)
+                                                            res.send({
+                                                                success: false,
+                                                                message: "Internal server error!"
+                                                            })
+                                                        })
+                                                })
+                                                .catch(function(error){
+                                                    console.log(error)
+                                                    res.send({
+                                                        success: false,
+                                                        message: "Internal server error!"
+                                                    })
+                                                })
+                                        })
+                                        .catch(function(error){
+                                            console.log(error)
+                                            res.send({
+                                                success: false,
+                                                message: "Internal server error!"
+                                            })
+                                        })
+                                })
+                                .catch(function(error){
+                                    console.log(error)
+                                    res.send({
+                                        success: false,
+                                        message: "Internal server error!"
+                                    })
+                                })
+                        })
+                        .catch(function(error){
+                            console.log(error)
+                            res.send({
+                                success: false,
+                                message: "Internal server error!"
+                            })
+                        })
+                })
+                .catch(function(error){
+                    console.log(error)
+                    res.send({
+                        success: false,
+                        message: "Internal server error!"
+                    })
+                })
+        })
+        .catch(function(error){
+            console.log(error)
+            res.send({
+                success: false,
+                message: "Internal server error!"
+            })
+        })
+})
+
+router.get('/standing/:group_name', (req, res) => {
+    const { group_name } = req.params;
+    if (group_name !== undefined){
+        knex.select().table(`Group${group_name}`).orderBy('poin', 'desc').orderBy('jumlah', 'desc')
+            .then( data => {
+                res.status(200).send({
+                    success: true,
+                    data
+                })
+            })
+            .catch(function(error){
+                res.status(400).send({
+                    success: false,
+                    message: "Group name not found!"
+                })
+            })
+    } else {
+        res.status(400).send({
+            success: false,
+            message: "Invalid group name!"
+        })
+    }
+})
 
 module.exports = router;
