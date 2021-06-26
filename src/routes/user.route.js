@@ -197,7 +197,7 @@ router.get('/wa/:owner_id', (req, res) => {
     }
 })
 
-router.get('/registered', (req, res) => {
+router.get('/registered/all', (req, res) => {
     knex.select().table('User').where({status:1})
         .then(data => {
             res.status(200).send({
