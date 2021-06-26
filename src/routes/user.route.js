@@ -126,10 +126,17 @@ router.put('/status', (req, res) => {
             .where({owner_id})
             .update({status})
             .then(data => {
-                res.status(200).send({
-                    success: true,
-                    message: "User status updated"
-                })
+                if (!data[0]) {
+                    res.status(404).send({
+                        success: false,
+                        message: "User not found!"
+                    })
+                } else {
+                    res.status(200).send({
+                        success: true,
+                        message: "User status updated!"
+                    })
+                }
             })
             .catch(function(error){
                 res.status(500).send({
