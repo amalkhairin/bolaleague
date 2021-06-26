@@ -160,4 +160,32 @@ router.delete('/', (req, res) => {
     })
 })
 
+router.get('/wa/:owner_id', (req, res) => {
+    const { owner_id } = req.params;
+    if (owner_id != undefined) {
+        knex.select('no_wa').table('User')
+            .where({owner_id})
+            .then(data => {
+                if (!data[0]) {
+                    res.status(404).send({
+                        success: false,
+                        message: "User not found!"
+                    })
+                } else {
+                    res.status(200).send({
+                        success: true,
+                        data
+                    })
+                }
+            })
+            .catch(function(error){
+                console.log(error);
+                res.status(500).send({
+                    success: false,
+                    message: "Internal server error!"
+                })
+            })
+    }
+})
+
 module.exports = router;
