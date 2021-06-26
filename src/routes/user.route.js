@@ -161,6 +161,7 @@ router.delete('/', (req, res) => {
         })
     })
     .catch(function(error){
+        console.log(error)
         res.status(500).send({
             success: false,
             message: "Internal server error!"
@@ -194,6 +195,23 @@ router.get('/wa/:owner_id', (req, res) => {
                 })
             })
     }
+})
+
+router.get('/user/registered', (req, res) => {
+    knex.select().table('User')
+        .then(data => {
+            res.status(200).send({
+                success: true,
+                data
+            })
+        })
+        .catch(function(error){
+            console.log(error)
+            res.status(500).send({
+                success: false,
+                message: "Internal server error!"
+            })
+        })
 })
 
 module.exports = router;
