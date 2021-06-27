@@ -214,4 +214,29 @@ router.get('/registered/all', (req, res) => {
         })
 })
 
+router.get('/is_open/:id_phase', (req, res) => {
+    const { id_phase } = req.params;
+    if (id_phase !== undefined) {
+        knex.select('is_open').table('phase_open').where({id_phase})
+            .then(data => {
+                let status;
+                if (data === 1) {
+                    status = true;
+                } else {
+                    status = false
+                }
+                res.status(200).send({
+                    success: true,
+                    data: status
+                })
+            })
+            .catch(function(error){
+                res.status(500).send({
+                    success: false,
+                    message: "Internal server error!"
+                })
+            })
+    }
+})
+
 module.exports = router;
