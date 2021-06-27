@@ -33,7 +33,7 @@ router.put('/update/:group_name', (req, res) => {
     if (match_id !== undefined && home_team_id !== undefined && away_team_id !== undefined && home_score !== undefined && away_score !== undefined && match_result !== undefined) {
         knex('MatchGroup').where({match_id}).update({home_score, away_score, is_finished})
             .then(_ => {
-                knex.select().table(`Group${group_name}`).where({owner_id: home_team_id})
+                knex(`Group${group_name}`).where({owner_id: home_team_id})
                     .then(team => {
                         console.log(group_name + " "+ home_team_id);
                         const sc1 = parseInt(home_score)
