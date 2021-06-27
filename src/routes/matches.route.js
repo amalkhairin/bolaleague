@@ -35,7 +35,7 @@ router.put('/update/:group_name', (req, res) => {
             .then(_ => {
                 knex.select().table(`Group${group_name}`).where({owner_id: home_team_id})
                     .then(team => {
-                        console.log(team);
+                        console.log(group_name + " "+ home_team_id);
                         const sc1 = parseInt(home_score)
                         const sc2 = parseInt(away_score)
                         let poin1 = team[0].poin
@@ -91,7 +91,7 @@ router.put('/update/:group_name', (req, res) => {
                                             })
                                             .catch(function(error){
                                                 console.log(error)
-                                                res.send({
+                                                res.status(500).send({
                                                     success: false,
                                                     message: "Internal server error!"
                                                 })
@@ -99,7 +99,7 @@ router.put('/update/:group_name', (req, res) => {
                                     })
                                     .catch(function(error){
                                         console.log(error)
-                                        res.send({
+                                        res.status(500).send({
                                             success: false,
                                             message: "Internal server error!"
                                         })
@@ -107,7 +107,7 @@ router.put('/update/:group_name', (req, res) => {
                             })
                             .catch(function(error){
                                 console.log(error)
-                                res.send({
+                                res.status(500).send({
                                     success: false,
                                     message: "Internal server error!"
                                 })
@@ -115,7 +115,7 @@ router.put('/update/:group_name', (req, res) => {
                     })
                     .catch(function(error){
                         console.log(error)
-                        res.send({
+                        res.status(500).send({
                             success: false,
                             message: "Internal server error!"
                         })
@@ -123,7 +123,7 @@ router.put('/update/:group_name', (req, res) => {
             })
             .catch(function(error){
                 console.log(error)
-                res.send({
+                res.status(500).send({
                     success: false,
                     message: "Internal server error!"
                 })
