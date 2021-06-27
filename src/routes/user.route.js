@@ -244,7 +244,7 @@ router.get('/is_open/:id_phase', (req, res) => {
     }
 })
 
-router.put('/is_open', (req, res) => {
+router.put('/is_open/update', (req, res) => {
     const { id_phase, is_open } = req.body;
     if (id_phase !== undefined) {
         knex('phase_open')
