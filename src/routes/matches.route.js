@@ -35,6 +35,7 @@ router.put('/update/:group_name', (req, res) => {
             .then(_ => {
                 knex.select().table(`Group${group_name}`).where({owner_id: home_team_id})
                     .then(team => {
+                        console.log(team);
                         const sc1 = parseInt(home_score)
                         const sc2 = parseInt(away_score)
                         let poin1 = team[0].poin
