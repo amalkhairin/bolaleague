@@ -248,7 +248,7 @@ router.put('/is_open/update', (req, res) => {
     const { id_phase, is_open } = req.body;
     if (id_phase !== undefined) {
         knex('phase_open')
-            .where({owner_id})
+            .where({id_phase})
             .update({is_open})
             .then(data => {
                 if (data === 0) {
