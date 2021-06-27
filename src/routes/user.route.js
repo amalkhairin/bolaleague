@@ -236,6 +236,45 @@ router.get('/is_open/:id_phase', (req, res) => {
                     message: "Internal server error!"
                 })
             })
+    } else {
+        res.status(400).send({
+            success: false,
+            message: "Invalid input!"
+        })
+    }
+})
+
+router.put('/is_open', (req, res) => {
+    const { id_phase, is_open } = req.body;
+    if (id_phase !== undefined) {
+        knex('phase_open')
+            .where({owner_id})
+            .update({is_open})
+            .then(data => {
+                if (data === 0) {
+                    res.status(404).send({
+                        success: false,
+                        message: "id not found!"
+                    })
+                } else {
+                    res.status(200).send({
+                        success: true,
+                        message: "open phase updated!"
+                    })
+                }
+            })
+            .catch(function(error){
+                console.log(error)
+                res.status(500).send({
+                    success: false,
+                    message: "Internal server error!"
+                })
+            })
+    } else {
+        res.status(400).send({
+            success: false,
+            message: "id phase is empty!"
+        })
     }
 })
 
