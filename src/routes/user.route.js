@@ -220,8 +220,7 @@ router.get('/is_open/:id_phase', (req, res) => {
         knex.select('is_open').table('phase_open').where({id_phase})
             .then(data => {
                 let status;
-                console.log(data[0].is_open)
-                if (data === 1) {
+                if (data[0].is_open === 1) {
                     status = true;
                 } else {
                     status = false
