@@ -11,6 +11,7 @@ const knex = require('../config/db');
             return { 
                 owner_id: t.owner_id,
                 team_name: t.team_name,
+                no_wa: t.no_wa,
                 poin: 0,
                 main: 0,
                 menang: 0,
