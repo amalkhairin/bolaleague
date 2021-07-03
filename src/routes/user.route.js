@@ -278,7 +278,7 @@ router.put('/is_open/update', (req, res) => {
     }
 })
 
-router.put('/message', (req, res) => {
+router.put('/admin/message', (req, res) => {
     const { message } = req.body;
     if (message !== undefined) {
         knex('MessageAdmin').where({id:1}).update({message})
@@ -310,7 +310,7 @@ router.put('/message', (req, res) => {
     }
 })
 
-router.get('/message', (req, res) => {
+router.get('/admin/message', (req, res) => {
     knex.select('message').table('MessageAdmin').where({id:1})
         .then(data => {
             res.status(200).send({
