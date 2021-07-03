@@ -278,4 +278,53 @@ router.put('/is_open/update', (req, res) => {
     }
 })
 
+router.put('/message', (req, res) => {
+    const { message } = req.body;
+    if (message !== undefined) {
+        knex('MessageAdmin').where({id:1}).update({message})
+            .then(data =>{
+                if (data === 0) {
+                    res.status(404).send({
+                        success: false,
+                        message: "id not found!"
+                    })
+                } else {
+                    res.status(200).send({
+                        success: true,
+                        message: "Message updated!"
+                    })
+                }
+            })
+            .catch(function(error){
+                console.log(error)
+                res.status(500).send({
+                    success: false,
+                    message: "Internal server error!"
+                })
+            })
+    } else {
+        res.status(400).send({
+            success: false,
+            message: "invalid message input!"
+        })
+    }
+})
+
+router.get('/message', (req, res) => {
+    knex.select('message').table('MessageAdmin').where({id:1})
+        .then(data => {
+            res.status(200).send({
+                success: true,
+                data
+            })
+        })
+        .catch(function(error){
+            console.log(error);
+            res.status(500).send({
+                success: false,
+                message: "Internal server error!"
+            })
+        })
+})
+
 module.exports = router;
