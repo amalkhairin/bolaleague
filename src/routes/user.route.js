@@ -327,4 +327,40 @@ router.get('/admin/message', (req, res) => {
         })
 })
 
+router.post('/admin/login', (req, res) => {
+    const username = req.body.username;
+    const pass = req.body.password;
+
+    knex('UserAdmin')
+        .where({username})
+        .select()
+        .then(function(result){
+            if (!result || !result[0]) {
+                res.status(404).send({
+                    success: false,
+                    message: "User not found!"
+                })
+            }
+            else if (pass === result[0].password){
+                res.status(200).send({
+                    success: true,
+                    message: "Login success!",
+                    data: result,
+                })
+            } else {
+                res.status(400).send({
+                    success: false,
+                    message: "Password mismatch!"
+                })
+            }
+        })
+        .catch(function(error){
+            console.log(error);
+            res.status(500).send({
+                success: false,
+                message: "Internal server error!"
+            })
+        })
+});
+
 module.exports = router;
