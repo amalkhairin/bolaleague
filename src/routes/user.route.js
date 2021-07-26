@@ -198,7 +198,7 @@ router.get('/wa/:owner_id', (req, res) => {
 })
 
 router.get('/registered/all', (req, res) => {
-    knex.select().table('User').where({status:1})
+    knex.select().table('User').where({status:1}).orderByRaw('RAND()')
         .then(data => {
             res.status(200).send({
                 success: true,
@@ -361,6 +361,101 @@ router.post('/admin/login', (req, res) => {
                 message: "Internal server error!"
             })
         })
+});
+
+router.get('/gallery/all', (req, res) => {
+    knex.select().table('WinnerGallery')
+        .then(data =>{
+            res.status(200).send({
+                success: true,
+                data
+            })
+        })
+        .catch(function(error){
+            console.log(error)
+            res.status(500).send({
+                success: false,
+                message: "Internal server error!"
+            })
+        })
+})
+
+router.post('/gallery/add', (req, res) => {
+    const { winner_id, winner_name, runner_up_id, runner_up_name } = req.body;
+    knex.select('season').table('Season')
+        .then(data => {
+            const season = data[0].season
+            knex('WinnerGallery').insert({winner_id, winner_name, runner_up_id, runner_up_name, season})
+                .then(_ => {
+                    res.status(201).send({
+                        success: true,
+                        message: "Galery updated!"
+                    })
+                })
+                .catch(function(error){
+                    console.log(error)
+                    res.status(500).send({
+                        success: false,
+                        message: "Internal server error!"
+                    })
+                })
+        })
+        .catch(function(error){
+            console.log(error)
+            res.status(500).send({
+                success: false,
+                message: "Internal server error!"
+            })
+        })
+})
+
+router.get('/season/now', (req, res) => {
+    knex.select('season').table('Season')
+        .then(data =>{
+            res.status(200).send({
+                success: true,
+                data
+            })
+        })
+        .catch(function(error){
+            console.log(error)
+            res.status(500).send({
+                success: false,
+                message: "Internal server error!"
+            })
+        })
+})
+
+router.put('/season/now', (req, res) => {
+    const { season } = req.body;
+    if(season !== undefined) {
+        knex('Season').where({id:1}).update({season})
+            .then(data =>{
+                if (data === 0) {
+                    res.status(404).send({
+                        success: false,
+                        message: "id not found!"
+                    })
+                } else {
+                    res.status(200).send({
+                        success: true,
+                        message: "Season updated!"
+                    })
+                }
+            })
+            .catch(function(error){
+                console.log(error)
+                res.status(500).send({
+                    success: false,
+                    message: "Internal server error!"
+                })
+            })
+    } else {
+        res.status(400).send({
+            success: false,
+            message: "invalid season input!"
+        })
+    }
 });
 
 module.exports = router;
