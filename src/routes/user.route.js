@@ -198,6 +198,23 @@ router.get('/wa/:owner_id', (req, res) => {
 })
 
 router.get('/registered/all', (req, res) => {
+    knex.select().table('User').where({status:1})
+        .then(data => {
+            res.status(200).send({
+                success: true,
+                data
+            })
+        })
+        .catch(function(error){
+            console.log(error)
+            res.status(500).send({
+                success: false,
+                message: "Internal server error!"
+            })
+        })
+})
+
+router.get('/registered/draw', (req, res) => {
     knex.select().table('User').where({status:1}).orderByRaw('RAND()')
         .then(data => {
             res.status(200).send({
